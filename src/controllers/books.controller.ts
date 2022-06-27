@@ -5,7 +5,7 @@ import { BooksService } from '../services/books.service';
 
 @Controller('books')
 export class BooksController {
-  constructor(private readonly booksService: BooksService) {}
+  constructor(private booksService: BooksService) {}
 
   @Post() // TODO: Middlewares segurança
   public async create(@Body() createBookDto: CreateBookDto): Promise<Book> {
