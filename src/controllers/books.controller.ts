@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Book } from 'src/models/entities/book.entity';
 import { CreateBookDto } from '../dto/create-book.dto';
 import { BooksService } from '../services/books.service';
@@ -8,20 +8,21 @@ export class BooksController {
   constructor(private booksService: BooksService) {}
 
   @Post() // TODO: Middlewares segurança
-  public async create(@Body() createBookDto: CreateBookDto): Promise<Book> {
+  public async create(
+    @Body() createBookDto: CreateBookDto,
+  ): Promise<Book | void> {
     return this.booksService.create(createBookDto);
   }
 
   @Get()
-  public async findAll(): Promise<Book[]> {
+  public async findAll(): Promise<Book[] | void> {
     return this.booksService.findAll();
   }
 
-  // TODO: Finalizar crud
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.booksService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string): Promise<Book | void> {
+    return this.booksService.findOne(+id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {

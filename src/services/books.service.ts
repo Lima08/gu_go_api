@@ -11,18 +11,37 @@ export class BooksService {
     private booksRepository: Repository<Book>,
   ) {}
 
-  public async create(createBookDto: CreateBookDto): Promise<Book> {
-    return this.booksRepository.save(createBookDto);
+  public async create(createBookDto: CreateBookDto): Promise<Book | void> {
+    try {
+      const response = await this.booksRepository.save(createBookDto);
+      return response;
+    } catch (error) {
+      // TODO: Tratamento de erro
+      return console.log(error);
+    }
   }
 
-  public async findAll(): Promise<Book[]> {
-    return this.booksRepository.find();
+  public async findAll(): Promise<Book[] | void> {
+    try {
+      const response = await this.booksRepository.find();
+      return response;
+    } catch (error) {
+      // TODO: Tratamento de erro
+      return console.log(error);
+    }
   }
 
-  // TODO: Finalizar crud
-  // findOne(id: number) {
-  //   return `This action returns a #${id} book`;
-  // }
+  public async findOne(id: number): Promise<Book | void> {
+    try {
+      const response: Book = await this.booksRepository.findOne({
+        where: { id },
+      });
+      return response;
+    } catch (error) {
+      // TODO: Tratamento de erro
+      return console.log(error);
+    }
+  }
 
   // update(id: number, updateBookDto: UpdateBookDto) {
   //   return `This action updates a #${id} book`;
@@ -30,5 +49,4 @@ export class BooksService {
 
   // remove(id: number) {
   //   return `This action removes a #${id} book`;
-  // }
 }
