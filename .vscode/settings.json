@@ -1,0 +1,15 @@
+{
+    "tslint.configFile": "tslint.json",
+    "cSpell.words": [ "IMSSQL", "middlewares", "typeorm"],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports": true
+    },
+    "editor.formatOnSave": true,
+    "mochaExplorer.require": "ts-node/register",
+    "mochaExplorer.files": "src/__tests__/**/*.ts",
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}

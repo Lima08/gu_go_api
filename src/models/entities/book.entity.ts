@@ -18,6 +18,10 @@ export class Book {
   @Column({ type: 'varchar', length: 255, nullable: true })
   public description: string;
 
+  // TODO: Fazer o tratamento de imagens
+  // @Column({ type: 'varchar', nullable: true })
+  // public image: string;
+
   @Column({ type: 'varchar', length: 30, unique: true })
   public ISBN: string;
 

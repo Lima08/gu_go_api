@@ -37,4 +37,4 @@ lerna-debug.log*
 # env
 .env
 
-gugo_db
+gugo_db.sql

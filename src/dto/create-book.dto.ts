@@ -9,6 +9,10 @@ export class CreateBookDto {
   @MaxLength(255)
   description: string;
 
+  // TODO: Colocar tratamento imagem
+  // @IsString()
+  // description: string;
+
   @IsString()
   @MaxLength(30)
   ISBN: string;

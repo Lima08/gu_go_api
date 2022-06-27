@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { typeOrmConfig } from 'ormconfig';
+import { typeOrmConfig } from 'src/database/typeorm/ormconfig';
 import { BooksModule } from './books.module';
 
 @Module({

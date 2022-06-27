@@ -1,15 +1,14 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Book } from 'src/models/entities/book.entity';
-import { BooksService } from '../services/books.service';
 import { CreateBookDto } from '../dto/create-book.dto';
+import { BooksService } from '../services/books.service';
 
 @Controller('books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
-  @Post()
+  @Post() // TODO: Middlewares segurança
   public async create(@Body() createBookDto: CreateBookDto): Promise<Book> {
-    console.log('sadfasdfasdffsd');
     return this.booksService.create(createBookDto);
   }
 
