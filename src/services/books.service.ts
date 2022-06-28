@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UpdateBookDto } from 'src/dto/update-book.dto';
+import { BookCreateError } from 'src/errors/books/BookCreateError';
 import { Book } from 'src/models/entities/book.entity';
 import { Repository } from 'typeorm';
 import { CreateBookDto } from '../dto/create-book.dto';
@@ -16,18 +18,21 @@ export class BooksService {
       const response = await this.booksRepository.save(createBookDto);
       return response;
     } catch (error) {
-      // TODO: Tratamento de erro
-      return console.log(error);
+      throw new BookCreateError({
+        path: 'Book create services',
+        error,
+      });
     }
   }
 
   public async findAll(): Promise<Book[] | void> {
+    // TODO: Tratamento de erro
     try {
       const response = await this.booksRepository.find();
       return response;
     } catch (error) {
       // TODO: Tratamento de erro
-      return console.log(error);
+      return console.log('caiu no erro --->', { error });
     }
   }
 
@@ -39,14 +44,32 @@ export class BooksService {
       return response;
     } catch (error) {
       // TODO: Tratamento de erro
-      return console.log(error);
+      return console.log('caiu no erro --->', { error });
     }
   }
 
-  // update(id: number, updateBookDto: UpdateBookDto) {
-  //   return `This action updates a #${id} book`;
-  // }
+  public async update(id: number, updateBookDto: UpdateBookDto) {
+    try {
+      const response = await this.booksRepository.update(
+        { id },
+        { ...updateBookDto },
+      );
+      return response;
+    } catch (error) {
+      // TODO: Tratamento de erro
+      return console.log('caiu no erro --->', { error });
+    }
+  }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} book`;
+  // public async remove(id: number) {
+  //   try {
+  //     const response: Book = await this.booksRepository.findOne({
+  //       where: { id },
+  //     });
+  //     return response;
+  //   } catch (error) {
+  //     // TODO: Tratamento de erro
+  //     return console.log(error);
+  //   }
+  // }
 }
